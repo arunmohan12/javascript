@@ -1,0 +1,131 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cnvas</title>
+</head>
+<body>
+    <p id="myInput"></p>
+    <canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+
+<script type="text/javascript" style='border: 1px solid; width: 700px; height:600px ; '>
+var canvas = document.getElementById("myCanvas");
+
+var ctx = canvas.getContext("2d");
+
+
+// Red rectangle
+function r1(x1,y1,w1,h1){
+ctx.beginPath();
+ctx.lineWidth = "6";
+ctx.strokeStyle = "red";
+this.x1 = x1;
+this.y1 = y1;
+ this.w1= w1;
+ this.h1 = h1;
+ ctx.rect(x1,y1,w1,h1)
+ ctx.stroke();
+
+}
+
+
+function r2(x2,y2,w2,h2){
+ctx.beginPath();
+ctx.lineWidth = "6";
+ctx.strokeStyle = "brown";
+this.x2 = x2;
+this.y2 = y2;
+this.w2= w2;
+this.h2 = h2;
+ctx.rect(x2,y2,w2,h2)
+
+ctx.stroke();
+}
+
+
+// Green rectangle
+function r3(x3,y3,w3,h3){
+ctx.beginPath();
+ctx.lineWidth = "4";
+ctx.strokeStyle = "green";
+ctx.rect(x3,y3,w3,h3);
+this.x3 = x3;
+this.y3 = y3;
+this.w3= w3;
+this.h3 = h3;
+ctx.stroke();
+}
+
+// Blue rectangle
+function r4(x4,y4,w4,h4){
+ctx.beginPath();
+ctx.lineWidth = "4";
+ctx.strokeStyle = "blue";
+ctx.rect(x4,y4,w4,h4);
+this.x4 = x4;
+this.y4 = y4;
+this.w4= w4;
+this.h4 = h4;
+ctx.stroke();
+}
+
+
+r1.prototype.isHitBy =  function(x1,y1,x2,y2){
+            return((x1 >= this.x1 && x1 <= this.x1 + this.w1 && y1 >= this.y1 && y1<= this.y1 + this.h1) );
+
+}
+
+r2.prototype.isHitBy =  function(x2,y2){
+           return(x2 >= this.x2 && x2 <= this.x2 + this.w2 && y2 >= this.y2 && y2<= this.y2 + this.h2);
+}
+r3.prototype.isHitBy =  function(x3,y3){
+           return(x3 >= this.x3 && x3 <= this.x3 + this.w3 && y3 >= this.y3 && y3<= this.y3 + this.h3);
+}
+r4.prototype.isHitBy =  function(x4,y4){
+           return(x4 >= this.x4 && x4 <= this.x4 + this.w4 && y4 >= this.y4 && y4<= this.y4 + this.h4);
+}
+
+var red = new r1(0, 0, 500, 500);
+var brown = new r2(100,30,200,150);
+var green = new r3(200, 100, 50, 25);
+var blue = new r4(400, 250, 80, 40);
+
+ctx.rect(red.x1, red.y1, red.w1, red.h1);
+ctx.rect(brown.x2, brown.y2, brown.w2, brown.h2);
+ctx.rect(green.x3, green.y3, green.w3, green.h3);
+ctx.rect(blue.x4, blue.y4, blue.w4, blue.h1);
+
+canvas.addEventListener('click',function(e){
+            var canvasBounds = canvas.getBoundingClientRect();
+            var clickX=e.pageX-canvasBounds.left;
+            var clickY= e.pageY- canvasBounds.top;
+            
+            
+            if (red.isHitBy(clickX,clickY)){
+            
+                var result="Clicked inside RED RECTANGLE";
+              
+                
+                document.getElementById("myInput").innerHTML = result;
+                
+            }
+          if (brown.isHitBy(clickX,clickY)){
+                var result="Clicked inside BROWN RECTANGLE";
+                document.getElementById("myInput").innerHTML = result;
+
+                
+          }
+          if (green.isHitBy(clickX,clickY)){
+                var result="Clicked inside GREEN RECTANGLE"; 
+                document.getElementById("myInput").innerHTML = result;
+          }
+          if (blue.isHitBy(clickX,clickY)){
+                var result="Clicked Inside BROWN RECTANGLE";    
+                document.getElementById("myInput").innerHTML = result;
+          }
+
+        });
+
+
+</script>
+</body>
+</html>
